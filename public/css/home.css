@@ -1,0 +1,23 @@
+body{
+    background-color: lightblue;
+}
+
+.home{
+    text-align: center;
+}
+
+img{
+    height: 250px;
+    width: 250px;
+}
+
+.delivery-img{
+    border: 2px solid #000000;
+    width: 250px;
+    width: 250px;
+}
+
+.logo{
+    width: 120px;
+    height:50px;
+}
