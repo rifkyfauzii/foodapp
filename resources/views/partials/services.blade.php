@@ -1,27 +1,6 @@
 @extends('layouts.main')
 
 @section('content')
-    <style>
-        .subtext-services {
-            color: #EB5757;
-            line-height: 22.4px;
-            font-family: "Poppins", sans-serif;
-            font-size: 18px;
-            font-weight: 600px;
-            text-align: center;
-            margin-top: 200px;
-
-        }
-
-        .headline-services {
-            font-family: "Poppins", sans-serif;
-            font-weight: 700;
-            color: #333333;
-            font-size: 45px;
-            line-height: 60px;
-            text-align: center;
-        }
-    </style>
     <section>
         <h2 class="subtext-services">WHAT WE SERVE</h2>
         <h2 class="headline-services">Your Favorit Food <br>Delivery Partner</h2>
