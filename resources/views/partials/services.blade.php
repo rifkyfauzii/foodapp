@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-    <section>
+    <section id="services">
         <h2 class="subtext-services">WHAT WE SERVE</h2>
         <h2 class="headline-services">Your Favorit Food <br>Delivery Partner</h2>
 

@@ -7,6 +7,10 @@
     <title>Fudo | Food Delivery</title>
     <link rel="stylesheet" href="css/home.css">
 
+    {{-- Bootstrap Icon --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+
     {{-- Google Fonts --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,7 +42,7 @@
                         <a class="nav-link link-dark" href="#menus">Menu</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link link-dark" href="#">Contact</a>
+                        <a class="nav-link link-dark" href="#contact">Contact</a>
                     </li>
                 </ul>
 

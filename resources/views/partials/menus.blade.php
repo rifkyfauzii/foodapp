@@ -7,26 +7,53 @@
 
             <div id="carouselExampleControls" class="horizontal-scroll">
                 <div class="carousel-menus">
-                    <div class="item"><img class="food" src="img/pizza.jpg" alt="pizza"></div>
-                    <div class="item"><img class="food" src="img/burger.jpg" alt="burger"></div>
-                    <div class="item"><img class="food" src="img/Ramen.jpg" alt="ramen"></div>
-                    <div class="item"><img class="food" src="img/icecream.jpg" alt="icecream"></div>
-                    <div class="item"><img class="food" src="img/cupcake.jpg" alt="cupcake"></div>
-
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
-                        data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
-                        data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
+                    <div class="card" style="width: 18rem;">
+                        <img class="food" src="img/pizza.jpg" alt="pizza">
+                        <div class="card-body">
+                            <h5 class="card-title">italian Pizza</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of the card's content.</p>
+                            <a href="#orders" class="btn btn-danger">Order</a>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 18rem;">
+                        <img class="food" src="img/burger.jpg" alt="Burger">
+                        <div class="card-body">
+                            <h5 class="card-title">Cheese Burger</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of the card's content.</p>
+                            <a href="#orders" class="btn btn-danger">Order</a>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 18rem;">
+                        <img class="food" src="img/ramen.jpg" alt="ramen">
+                        <div class="card-body">
+                            <h5 class="card-title">Teriyaki Ramen</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of the card's content.</p>
+                            <a href="#orders" class="btn btn-danger">Order</a>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 18rem;">
+                        <img class="food" src="img/icecream.jpg" alt="icecream">
+                        <div class="card-body">
+                            <h5 class="card-title">Ice cream</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of the card's content.</p>
+                            <a href="#orders" class="btn btn-danger">Order</a>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 18rem;">
+                        <img class="food" src="img/cupcake.jpg" alt="cupcake">
+                        <div class="card-body">
+                            <h5 class="card-title">Cupcakes</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of the card's content.</p>
+                            <a href="#orders" class="btn btn-danger">Order</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-        </section>
-    </div>
 
-</section>
+        </section>
