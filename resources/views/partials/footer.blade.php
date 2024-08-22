@@ -17,10 +17,10 @@
                     <h6 class="text-uppercase fw-bold">Quick Links</h6>
                     <hr class="mb-4 mt-0 d-inline-block mx-auto"
                         style="width: 60px; background-color: #EB5757; height: 2px" />
-                    <p><a href="#" class="text-dark">Home</a></p>
-                    <p><a href="#" class="text-dark">Services</a></p>
-                    <p><a href="#" class="text-dark">Menus</a></p>
-                    <p><a href="#" class="text-dark">Contact</a></p>
+                    <p><a href="/" class="text-dark">Home</a></p>
+                    <p><a href="#services" class="text-dark">Services</a></p>
+                    <p><a href="#menus" class="text-dark">Menus</a></p>
+                    <p><a href="#contact" class="text-dark">Contact</a></p>
                 </div>
 
                 <!-- Contact Information -->
