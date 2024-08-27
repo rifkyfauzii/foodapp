@@ -10,7 +10,7 @@
 </head>
 
 <body class="bg-light">
-    <a href="{{ url('admin') }}" class="btn btn-secondary m-3">Kembali</a>
+    <a href="{{ url('admin') }}" class="btn btn-secondary m-4">Kembali</a>
     @if ($errors->any())
         <div class="pt-3">
             <div class="alert alert-danger">
@@ -22,20 +22,21 @@
             </div>
         </div>
     @endif
-    <form action="{{ url('admin') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ url('admin/' . $data->name) }}" method="post" enctype="multipart/form-data">
         @csrf
+        @method('PUT')
         <div class="my-3 p-3 bg-body rounded shadow-sm">
             <div class="mb-3 row">
                 <label for="nim" class="col-sm-2 col-form-label">NAMA</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name='name' value="{{ session('name') }}"
+                    <input type="text" class="form-control" name='name' value="{{ $data->name }}"
                         id="nim">
                 </div>
             </div>
             <div class="mb-3 row">
                 <label for="nama" class="col-sm-2 col-form-label">HARGA</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name='price' value="{{ session('price') }}"
+                    <input type="text" class="form-control" name='price' value="{{ $data->price }}"
                         id="price">
                 </div>
             </div>

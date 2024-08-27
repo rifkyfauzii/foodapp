@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;   
-use App\Http\Controllers\foodappController;
+use App\Http\Controllers\FoodappController;
 
 
 /*
@@ -19,4 +19,4 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::resource('admin',foodappController::class);
+Route::resource('admin', FoodappController::class);

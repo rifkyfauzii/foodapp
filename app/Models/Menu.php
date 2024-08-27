@@ -9,4 +9,6 @@ class Menu extends Model
 {
     use HasFactory;
     protected $fillable = ['name','image','price'];
+    protected $table = 'menus';
+    public $timestamps = false;
 }

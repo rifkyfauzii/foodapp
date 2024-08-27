@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\menu;
+use App\Models\Menu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+
 
 class foodappController extends Controller
 {
@@ -14,7 +16,8 @@ class foodappController extends Controller
      */
     public function index()
     {
-        return view('foodapp.index');
+        $menu = Menu::orderBy('name','desc')->paginate(2);
+        return view('foodapp.index')->with('menu', $menu);
     }
 
     /**
@@ -36,10 +39,20 @@ class foodappController extends Controller
     public function store(Request $request)
 {   
       // Validasi input dari user
+      Session::flash('name',$request->name);
+      Session::flash('price',$request->price);
+
       $request->validate([
-        'name' => 'required|string|max:255',
+        'name' => 'required|string|unique:menus,name,max:255',
         'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        'price' => 'required|integer|min:0',
+        'price' => 'required|integer',
+    ],[
+        'name.required'=>'Nama Wajib Diisi',
+        'name.string'=>'Nama Wajib dalam huruf',
+        'name.unique'=>'Nama yang diinput sudah ada di dalam database',
+        'price.integer'=>'Harga Wajib dalam Angka',
+        'image.required'=>'Gambar Wajib Diisi',
+        'price.required'=>'Harga Wajib Diisi',
     ]);
 
     $imagePath = '';
@@ -47,6 +60,7 @@ class foodappController extends Controller
     if ($request->hasFile('image')) {
         $imagePath = $request->file('image')->store('images-upload', 'public');
     }
+    $price = str_replace('.', '', $request->input('price'));
 
     $menu = new Menu();
     $menu->name = $request->input('name');
@@ -55,7 +69,7 @@ class foodappController extends Controller
 
     $menu->save();
 
-    return redirect()->route('foodapp.index')->with('success', 'Menu berhasil ditambahkan');
+    return redirect()->to('admin')->with('success','Berhasil Menambahkan Menu');
 }
 
     /**
@@ -77,7 +91,8 @@ class foodappController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = menu::where('name',$id)->first();
+        return view('foodapp.edit')->with('data',$data);
     }
 
     /**
@@ -89,7 +104,33 @@ class foodappController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|unique:menus,name,max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'price' => 'required|integer',
+        ],[
+            'name.required'=>'Nama Wajib Diisi',
+            'name.string'=>'Nama Wajib dalam huruf',
+            'name.unique'=>'Nama yang diinput sudah ada di dalam database',
+            'price.integer'=>'Harga Wajib dalam Angka',
+            'image.required'=>'Gambar Wajib Diisi',
+            'price.required'=>'Harga Wajib Diisi',
+        ]);
+    
+        $imagePath = '';
+    
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images-upload', 'public');
+        }
+    
+        $data = [
+            'name' => $request->input('name'),
+            'image' => $imagePath,
+            'price' => $request->input('price'),
+        ];
+    
+        $menu = Menu::where('name', $id)->update($data);
+        return redirect()->to('admin')->with('success','Berhasil Mengubah Menu');
     }
 
     /**
@@ -100,6 +141,7 @@ class foodappController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Menu::where('name', $id)->delete();
+        return redirect()->to('admin')->with('success','Berhasil Menghapus Menu');
     }
 }

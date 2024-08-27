@@ -175,3 +175,8 @@ textarea.form-control:focus {
 .footer-section{
     margin-top: 45px;
 }
+
+/* Allert data added section */
+.alert{
+    padding-top: 50px;
+}

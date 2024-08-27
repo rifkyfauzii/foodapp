@@ -5,9 +5,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Fudo | Admin Page</title>
+    <link rel="stylesheet" href="css/home.css">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 </head>
+
 
 <body class="bg-light">
     {{-- Navbar Start --}}
@@ -29,6 +32,15 @@
             </div>
         </div>
     </nav>
+
+    {{-- Errors Success --}}
+    @if (Session::has('success'))
+        <div class="pt-3">
+            <div class="alert alert-success">
+                {{ Session::get('success') }}
+            </div>
+        </div>
+    @endif
     {{-- Navbar End --}}
     <main class="container">
 
@@ -39,7 +51,7 @@
 
             <!-- TOMBOL TAMBAH DATA -->
             <div class="pb-3 text-end me-3 mt-3 mb-3">
-                <a href='#' class="btn btn-primary">+ Tambah Data</a>
+                <a href='{{ url('admin/create') }}' class="btn btn-primary">+ Tambah Data</a>
             </div>
 
             <table class="table table-striped">
@@ -53,18 +65,35 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>1001</td>
-                        <td>Ani</td>
-                        <td>Ilmu Komputer</td>
-                        <td>
-                            <a href='' class="btn btn-warning btn-sm">Edit</a>
-                            <a href='' class="btn btn-danger btn-sm">Del</a>
-                        </td>
-                    </tr>
+                    <?php $i = $menu->firstItem(); ?>
+                    @foreach ($menu as $item)
+                        <tr>
+                            <td>{{ $i }}</td>
+                            <td>{{ $item->name }}</td>
+                            <td>{{ $item->price }}</td>
+                            <td>
+                                @if ($item->image)
+                                    <img style="width:150px; height:auto;"
+                                        src="{{ url('images-upload') . '/' . $item->image }}">
+                                @endif
+                            </td>
+                            <td>
+                                <a href='{{ url('admin/' . $item->name . '/edit') }}'
+                                    class="btn btn-warning btn-sm">Edit</a>
+                                <form onsubmit="return confirm ('Apakah Yakin ingin menghapus menu?')" class="d-inline"
+                                    action="{{ url('admin/' . $item->name) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" name="submit" class="btn btn-danger btn-sm">Del</button>
+                                </form>
+                            </td>
+                        </tr>
+
+                        <?php $i++; ?>
+                    @endforeach
                 </tbody>
             </table>
+            {{ $menu->links() }}
 
         </div>
         <!-- AKHIR DATA -->
