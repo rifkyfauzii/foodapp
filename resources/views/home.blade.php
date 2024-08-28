@@ -44,7 +44,7 @@
 
         {{-- Menus Section --}}
         <div id="menus">
-            @include('partials.menus')
+            @include('partials.menus', ['menus' => $menus])
         </div>
 
         <br>

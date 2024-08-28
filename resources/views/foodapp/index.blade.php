@@ -73,8 +73,7 @@
                             <td>{{ $item->price }}</td>
                             <td>
                                 @if ($item->image)
-                                    <img style="width:150px; height:auto;"
-                                        src="{{ url('images-upload') . '/' . $item->image }}">
+                                    <img style="width:60px; height:60px;" src="{{ asset('storage/' . $item->image) }}">
                                 @endif
                             </td>
                             <td>

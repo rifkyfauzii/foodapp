@@ -42,7 +42,7 @@
             <div class="mb-3 row">
                 <label for="jurusan" class="col-sm-2 col-form-label">GAMBAR</label>
                 <div class="col-sm-10">
-                    <input type="file" class="form-control" name='image' id="jurusan" accept="image/*" required>
+                    <input type="file" class="form-control" name='image' id="image" accept="image/*" required>
                 </div>
             </div>
             <div class="mb-3 row">

@@ -42,9 +42,9 @@ class foodappController extends Controller
       Session::flash('name',$request->name);
       Session::flash('price',$request->price);
 
-      $request->validate([
+     $validateData = $request->validate([
         'name' => 'required|string|unique:menus,name,max:255',
-        'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'image' => 'required|image|file|max:1024|mimes:jpeg,png,jpg,gif|',
         'price' => 'required|integer',
     ],[
         'name.required'=>'Nama Wajib Diisi',
@@ -58,8 +58,10 @@ class foodappController extends Controller
     $imagePath = '';
 
     if ($request->hasFile('image')) {
-        $imagePath = $request->file('image')->store('images-upload', 'public');
+        $imagePath = $request->file('image')->store('images-upload');
     }
+
+
     $price = str_replace('.', '', $request->input('price'));
 
     $menu = new Menu();
@@ -143,5 +145,11 @@ class foodappController extends Controller
     {
         Menu::where('name', $id)->delete();
         return redirect()->to('admin')->with('success','Berhasil Menghapus Menu');
+    }
+    
+    public function showMenus()
+    {
+        $menus = Menu::all(); 
+        return view('home', compact('menus')); 
     }
 }

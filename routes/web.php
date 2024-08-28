@@ -20,3 +20,6 @@ Route::get('/', function () {
 });
 
 Route::resource('admin', FoodappController::class);
+
+//Show Menus ke halaman utama
+Route::get('/', [FoodappController::class, 'showMenus'])->name('menus');
