@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/home.css">
 
     {{-- Bootstrap Icon --}}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 
     {{-- Google Fonts --}}
@@ -48,7 +48,8 @@
 
                 <ul class="navbar-nav ms-auto mb-2 me-4">
                     <li class="nav-item">
-                        <button type="button" href="#" class="btn btn-danger">Login</button>
+                        <a href="/login" class="nav-link text-danger fw-bold"><i class="bi bi-box-arrow-in-right"></i>
+                            Login</a>
                     </li>
                 </ul>
             </div>

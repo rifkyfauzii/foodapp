@@ -180,3 +180,46 @@ textarea.form-control:focus {
 .alert{
     padding-top: 50px;
 }
+
+/* Login PlayGround */
+
+  
+  .form-signin .form-floating:focus-within {
+    z-index: 2;
+  }
+  
+  .form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  
+  .form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+  
+
+.form-signin .form-floating {
+    margin-bottom: 1.5rem;
+}
+
+.form-signin .form-control {
+    padding: 1rem;
+    font-size: 1rem;
+}
+
+
+.form-signin h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-signin .btn-primary {
+    transition: background-color 0.3s ease;
+}
+
+.form-signin a:hover {
+    text-decoration: underline;
+}

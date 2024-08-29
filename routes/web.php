@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;   
 use App\Http\Controllers\FoodappController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 
 
 /*
@@ -23,3 +25,9 @@ Route::resource('admin', FoodappController::class);
 
 //Show Menus ke halaman utama
 Route::get('/', [FoodappController::class, 'showMenus'])->name('menus');
+
+
+Route::get('/login',[LoginController::class, 'index']);
+
+Route::get('/register',[RegisterController::class, 'index']);
+Route::post('/register',[RegisterController::class, 'store']);
