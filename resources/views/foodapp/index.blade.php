@@ -9,6 +9,11 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+
 </head>
 
 
@@ -24,21 +29,42 @@
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 </ul>
+
+                <ul class="navbar-nav justify-content-center ms-3 mt-2">
+                    <a class="nav-link fw-bold text-light mx-2" href="#" id="navbarDropdown" role="button"
+                        aria-expanded="false">
+                        Kelola Menu
+                    </a>
+                    <a class="nav-link fw-bold text-light mx-2" href="{{ url('orderManage') }}" id="navbarDropdown"
+                        role="button" aria-expanded="false">
+                        Kelola Pesanan
+                    </a>
+                </ul>
+
+
+
                 <ul class="navbar-nav ms-auto mt-3 mb-2 me-4">
-                    <li class="nav-item">
-                        <button type="button" href="#" class="btn btn-light text-danger">Logout</button>
-                    </li>
+                    <a class="nav-link me-4 text-light" href="#" id="navbarDropdown" role="button"
+                        aria-expanded="false">
+                        Halo, Admin !
+                    </a>
+                    <form action="/logout" method="post">
+                        @csrf
+                        <button type="submit" class="nav-link px-3 mt-1 text-danger bg-light border-0"><i
+                                class="bi bi-box-arrow-right"></i>
+                            Logout</button>
+                    </form>
                 </ul>
             </div>
         </div>
     </nav>
 
-    {{-- Errors Success --}}
+    {{-- Alert Success --}}
     @if (Session::has('success'))
-        <div class="pt-3">
-            <div class="alert alert-success">
-                {{ Session::get('success') }}
-            </div>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ Session::get('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+            </button>
         </div>
     @endif
     {{-- Navbar End --}}
@@ -70,7 +96,7 @@
                         <tr>
                             <td>{{ $i }}</td>
                             <td>{{ $item->name }}</td>
-                            <td>{{ $item->price }}</td>
+                            <td>Rp {{ number_format($item->price, 0, ',', '.') }}</td>
                             <td>
                                 @if ($item->image)
                                     <img style="width:60px; height:60px;" src="{{ asset('storage/' . $item->image) }}">

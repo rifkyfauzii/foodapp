@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Menu;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -16,7 +17,15 @@ class foodappController extends Controller
      */
     public function index()
     {
-        $menu = Menu::orderBy('name','desc')->paginate(2);
+        if (!auth()->check()) {
+            abort(403);
+        }
+
+        if (auth()->user()->role !== 'admin') {
+            abort(403);
+        }
+
+        $menu = Menu::orderBy('created_at', 'desc')->paginate(5);
         return view('foodapp.index')->with('menu', $menu);
     }
 
@@ -37,42 +46,43 @@ class foodappController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-{   
-      // Validasi input dari user
-      Session::flash('name',$request->name);
-      Session::flash('price',$request->price);
+    {
+        // Validasi input dari user
+        Session::flash('name', $request->name);
+        Session::flash('price', $request->price);
 
-     $validateData = $request->validate([
-        'name' => 'required|string|unique:menus,name,max:255',
-        'image' => 'required|image|file|max:1024|mimes:jpeg,png,jpg,gif|',
-        'price' => 'required|integer',
-    ],[
-        'name.required'=>'Nama Wajib Diisi',
-        'name.string'=>'Nama Wajib dalam huruf',
-        'name.unique'=>'Nama yang diinput sudah ada di dalam database',
-        'price.integer'=>'Harga Wajib dalam Angka',
-        'image.required'=>'Gambar Wajib Diisi',
-        'price.required'=>'Harga Wajib Diisi',
-    ]);
+        $validateData = $request->validate([
+            'name' => 'required|string|unique:menus,name,max:255',
+            'image' => 'required|image|file|max:1024|mimes:jpeg,png,jpg,gif|',
+            'price' => 'required|integer',
+        ], [
+            'name.required' => 'Nama Wajib Diisi',
+            'name.string' => 'Nama Wajib dalam huruf',
+            'name.unique' => 'Nama yang diinput sudah ada di dalam database',
+            'price.integer' => 'Harga Wajib dalam Angka',
+            'image.required' => 'Gambar Wajib Diisi',
+            'price.required' => 'Harga Wajib Diisi',
+        ]);
 
-    $imagePath = '';
+        $imagePath = '';
 
-    if ($request->hasFile('image')) {
-        $imagePath = $request->file('image')->store('images-upload');
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images-upload');
+        }
+
+
+        $price = str_replace('.', '', $request->input('price'));
+
+        $menu = new Menu();
+        $menu->name = $request->input('name');
+        $menu->image = $imagePath;
+        $menu->price = $request->input('price'); // Saving price
+        $menu->created_at = Carbon::now();
+
+        $menu->save();
+
+        return redirect()->to('admin')->with('success', 'Berhasil Menambahkan Menu');
     }
-
-
-    $price = str_replace('.', '', $request->input('price'));
-
-    $menu = new Menu();
-    $menu->name = $request->input('name');
-    $menu->image = $imagePath;
-    $menu->price = $request->input('price'); // Saving price
-
-    $menu->save();
-
-    return redirect()->to('admin')->with('success','Berhasil Menambahkan Menu');
-}
 
     /**
      * Display the specified resource.
@@ -93,8 +103,8 @@ class foodappController extends Controller
      */
     public function edit($id)
     {
-        $data = menu::where('name',$id)->first();
-        return view('foodapp.edit')->with('data',$data);
+        $data = menu::where('name', $id)->first();
+        return view('foodapp.edit')->with('data', $data);
     }
 
     /**
@@ -110,29 +120,29 @@ class foodappController extends Controller
             'name' => 'required|string|unique:menus,name,max:255',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'price' => 'required|integer',
-        ],[
-            'name.required'=>'Nama Wajib Diisi',
-            'name.string'=>'Nama Wajib dalam huruf',
-            'name.unique'=>'Nama yang diinput sudah ada di dalam database',
-            'price.integer'=>'Harga Wajib dalam Angka',
-            'image.required'=>'Gambar Wajib Diisi',
-            'price.required'=>'Harga Wajib Diisi',
+        ], [
+            'name.required' => 'Nama Wajib Diisi',
+            'name.string' => 'Nama Wajib dalam huruf',
+            'name.unique' => 'Nama yang diinput sudah ada di dalam database',
+            'price.integer' => 'Harga Wajib dalam Angka',
+            'image.required' => 'Gambar Wajib Diisi',
+            'price.required' => 'Harga Wajib Diisi',
         ]);
-    
+
         $imagePath = '';
-    
+
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('images-upload', 'public');
         }
-    
+
         $data = [
             'name' => $request->input('name'),
             'image' => $imagePath,
             'price' => $request->input('price'),
         ];
-    
+
         $menu = Menu::where('name', $id)->update($data);
-        return redirect()->to('admin')->with('success','Berhasil Mengubah Menu');
+        return redirect()->to('admin')->with('success', 'Berhasil Mengubah Menu');
     }
 
     /**
@@ -144,12 +154,14 @@ class foodappController extends Controller
     public function destroy($id)
     {
         Menu::where('name', $id)->delete();
-        return redirect()->to('admin')->with('success','Berhasil Menghapus Menu');
+        return redirect()->to('admin')->with('success', 'Berhasil Menghapus Menu');
     }
-    
+
+
+    //SHOW MENUS
     public function showMenus()
     {
-        $menus = Menu::all(); 
-        return view('home', compact('menus')); 
+        $menus = Menu::all();
+        return view('home', compact('menus'));
     }
 }

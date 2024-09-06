@@ -22,19 +22,58 @@
                     <h1 class="h4 mb-3 fw-bold text-dark">Register Form</h1>
 
                     <div class="form-floating mb-4">
-                        <input type="text" name="name" class="form-control" id="floatingInput"
-                            placeholder="Masukan Username">
+                        <input type="text" name="name"
+                            class="form-control @error('name')
+                            is-invalid
+                        @enderror"
+                            id="floatingInput" placeholder="Masukan Username" required value="{{ old('name') }}">
                         <label for="floatingInput">Username</label>
+                        @error('name')
+                            <div class="invalid-feedback text-start">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
+
                     <div class="form-floating mb-4">
-                        <input type="email" name="email" class="form-control" id="floatingInput"
-                            placeholder="name@example.com">
+                        <input type="text" name="role"
+                            class="form-control @error('role')
+                            is-invalid
+                        @enderror"
+                            id="floatingInput" placeholder="Masukan Role" required value="{{ old('role') }}">
+                        <label for="floatingInput">Role</label>
+                        @error('role ')
+                            <div class="invalid-feedback text-start">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+
+                    <div class="form-floating mb-4">
+                        <input type="email" name="email"
+                            class="form-control @error('email')
+                        is-invalid
+                        @enderror"
+                            id="floatingInput" placeholder="name@example.com" required value="{{ old('email') }}">
                         <label for="floatingInput">Email address</label>
+                        @error('email')
+                            <div class="invalid-feedback text-start">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="form-floating mb-4">
-                        <input type="password" name="password" class="form-control" id="floatingPassword"
-                            placeholder="Password">
+                        <input type="password" name="password"
+                            class="form-control @error('password')
+                        is-invalid
+                        @enderror"
+                            id="floatingPassword" placeholder="Password" required>
                         <label for="floatingPassword">Password</label>
+                        @error('password')
+                            <div class="invalid-feedback text-start">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
 
                     <button class="w-100 btn btn-lg btn-danger" type="submit">Register</button>

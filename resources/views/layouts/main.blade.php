@@ -30,27 +30,44 @@
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse justify-content-center mt-3" id="navbarNav">
-                <ul class="navbar-nav ms-auto mb-2" style="margin-right: 60px;">
+            <div class="collapse navbar-collapse justify-content-center me-4 mt-3" id="navbarNav">
+                <ul class="navbar-nav ms-auto mb-2">
                     <li class="nav-item mx-3">
-                        <a class="nav-link link-dark" href="/">Why Fudo?</a>
+                        <a class="nav-link link-dark" href="/">Home</a>
                     </li>
-                    <li class="nav-item mx-3">
+                    <li class="nav-item mx-4">
                         <a id="services-link" class="nav-link link-dark" href="#services">Services</a>
                     </li>
-                    <li class="nav-item mx-3">
+                    <li class="nav-item mx-4">
                         <a class="nav-link link-dark" href="#menus">Menu</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link link-dark" href="#contact">Contact</a>
                     </li>
                 </ul>
-
-                <ul class="navbar-nav ms-auto mb-2 me-4">
-                    <li class="nav-item">
-                        <a href="/login" class="nav-link text-danger fw-bold"><i class="bi bi-box-arrow-in-right"></i>
-                            Login</a>
-                    </li>
+                <ul class="navbar-nav ms-auto mb-2">
+                    @auth
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-danger" href="#" id="navbarDropdown"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Halo, {{ auth()->user()->name }}
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li>
+                                    <form action="/logout" method="post">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item"><i class="bi bi-box-arrow-right"></i>
+                                            Logout</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a href="/login" class="nav-link text-danger fw-bold"><i class="bi bi-box-arrow-in-right"></i>
+                                Login</a>
+                        </li>
+                    @endauth
                 </ul>
             </div>
         </div>

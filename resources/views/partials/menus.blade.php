@@ -53,11 +53,17 @@
                                 <h5 class="card-title font-weight-bold" style="font-size: 1.25rem;">{{ $menu->name }}
                                 </h5>
                                 <p class="card-text text-muted">Rp {{ number_format($menu->price, 0, ',', '.') }}</p>
-                                <a href="#orders" class="btn btn-danger w-100 mt-3">Order Now</a>
+
+                                @auth
+                                    {{-- <form action="/order">
+                                        <button type="submit" class="btn btn-danger">Order</button>
+                                    </form> --}}
+
+                                    <a href="/order/{{ $menu->id }}" class="btn btn-danger">Order</a>
+                                @endauth
                             </div>
                         </div>
                     </div>
                 @endforeach
             </div>
-
         </section>
