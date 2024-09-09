@@ -8,17 +8,34 @@
     <!-- Include Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    {{-- Bootstrap Icon --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
 <body>
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show p-3" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+            </button>
+        </div>
+    @endif
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card border-0 shadow">
                     <div class="card-header bg-danger text-white text-center">
                         <h4>FUDO | Menu Order</h4>
+
+                        <a href="{{ url('/') }}" class=" btn btn-secondary m-1"><i
+                                class="bi bi-chevron-bar-left"></i>Kembali</a>
                     </div>
                     <div class="card-body">
+                        {{-- Gambar Menu --}}
+                        <img class="food" src="{{ asset('storage/' . $menu->image) }}" alt="menus"
+                            style=" width:120px; height: 120px; object-fit: cover;">
+
                         <form action="/order/{{ $menu->id }}" method="post">
                             @csrf
                             <!-- Nama Menu -->
@@ -46,7 +63,7 @@
                             <div class="mb-3">
                                 <label for="pesan" class="form-label">Catatan Pengiriman</label>
                                 <textarea class="form-control border-danger" id="pesan" name="notes" rows="3"
-                                    placeholder="Masukkan Catatan"></textarea>
+                                    placeholder="Variant,Ukuran,topping.."></textarea>
                             </div>
 
                             <!-- Tombol Submit -->

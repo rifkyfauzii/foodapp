@@ -32,7 +32,7 @@
             </button>
             <div class="collapse navbar-collapse justify-content-center me-4 mt-3" id="navbarNav">
                 <ul class="navbar-nav ms-auto mb-2">
-                    <li class="nav-item mx-3">
+                    <li class="nav-item mx-4">
                         <a class="nav-link link-dark" href="/">Home</a>
                     </li>
                     <li class="nav-item mx-4">
@@ -41,7 +41,7 @@
                     <li class="nav-item mx-4">
                         <a class="nav-link link-dark" href="#menus">Menu</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item mx-4">
                         <a class="nav-link link-dark" href="#contact">Contact</a>
                     </li>
                 </ul>
@@ -56,8 +56,10 @@
                                 <li>
                                     <form action="/logout" method="post">
                                         @csrf
-                                        <button type="submit" class="dropdown-item"><i class="bi bi-box-arrow-right"></i>
-                                            Logout</button>
+                                        <button type="submit" class="dropdown-item">
+                                            <i class="bi bi-box-arrow-in-left"></i>
+                                            Logout
+                                        </button>
                                     </form>
                                 </li>
                             </ul>

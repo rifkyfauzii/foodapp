@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Menu;
 use App\Models\Order;
+use Facade\Ignition\Exceptions\ViewException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,15 +21,31 @@ class OrderController extends Controller
     {
         $menu = Menu::findorFail($id);
         Order::create([
-            'notes' => $request->input('notes'),
-            'qty' => (int)$request->input('quantity'),
             'name' => $menu->name,
             'price' => $menu->price,
+            'qty' => (int)$request->input('quantity'),
+            'notes' => $request->input('notes'),
             'total' => $menu->price * (int)$request->input('quantity'),
             'user_id' => Auth::user()->id,
-
         ]);
 
-        return back()->with('loginError', 'Login Failed');
+        return redirect()->back()->with('success', 'Menu telah di pesan!');
+    }
+
+    public function order(Request $request)
+    {
+
+        if (!auth()->check()) {
+            abort(403);
+        }
+
+        if (auth()->user()->role !== 'admin') {
+            abort(403);
+        }
+
+        $order = Order::orderBy('created_at', 'desc')->paginate(5);
+        return view('kelolaOrder')->with('order', $order);
+
+        // return view('kelolaOrder');
     }
 }

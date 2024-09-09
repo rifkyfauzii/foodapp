@@ -51,7 +51,7 @@
                     <form action="/logout" method="post">
                         @csrf
                         <button type="submit" class="nav-link px-3 mt-1 text-danger bg-light border-0"><i
-                                class="bi bi-box-arrow-in-left"></i>
+                                class="bi bi-box-arrow-right"></i>
                             Logout</button>
                     </form>
                 </ul>
@@ -59,67 +59,44 @@
         </div>
     </nav>
 
-    {{-- Alert Success --}}
-    @if (Session::has('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ Session::get('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-            </button>
-        </div>
-    @endif
     {{-- Navbar End --}}
     <main class="container">
 
         <!-- START DATA -->
         <div class="my-3 p-3 bg-body rounded shadow-sm">
 
-            <h1>Kelola Menu</h1>
+            <h1>Data Pesanan</h1>
 
-            <!-- TOMBOL TAMBAH DATA -->
-            <div class="pb-3 text-end me-3 mt-3 mb-3">
-                <a href='{{ url('admin/create') }}' class="btn btn-primary">+ Tambah Data</a>
-            </div>
+            <br>
+            <br>
 
             <table class="table table-striped">
                 <thead>
-                    <tr>
+                    <tr class="text-center">
                         <th class="col-md-1">No</th>
-                        <th class="col-md-3">Nama</th>
-                        <th class="col-md-4">Harga</th>
-                        <th class="col-md-2">Gambar</th>
-                        <th class="col-md-2">Aksi</th>
+                        <th class="col-md-2">Nama</th>
+                        <th class="col-md-2">Harga</th>
+                        <th class="col-md-2">Jumlah pesanan</th>
+                        <th class="col-md-3">Pesan</th>
+                        <th class="col-md-2">Total</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $i = $menu->firstItem(); ?>
-                    @foreach ($menu as $item)
-                        <tr>
+                    <?php $i = $order->firstItem(); ?>
+                    @foreach ($order as $items)
+                        <tr class="text-center">
                             <td>{{ $i }}</td>
-                            <td>{{ $item->name }}</td>
-                            <td>Rp {{ number_format($item->price, 0, ',', '.') }}</td>
-                            <td>
-                                @if ($item->image)
-                                    <img style="width:60px; height:60px;" src="{{ asset('storage/' . $item->image) }}">
-                                @endif
-                            </td>
-                            <td>
-                                <a href='{{ url('admin/' . $item->name . '/edit') }}'
-                                    class="btn btn-warning btn-sm">Edit</a>
-                                <form onsubmit="return confirm ('Apakah Yakin ingin menghapus menu?')" class="d-inline"
-                                    action="{{ url('admin/' . $item->name) }}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" name="submit" class="btn btn-danger btn-sm">Del</button>
-                                </form>
-                            </td>
+                            <td>{{ $items->name }}</td>
+                            <td>Rp {{ number_format($items->price, 0, ',', '.') }}</td>
+                            <td>{{ $items->qty }}</td>
+                            <td class="text-left">{{ $items->notes }}</td>
+                            <td>Rp {{ number_format($items->total, 0, ',', '.') }}</td>
                         </tr>
-
                         <?php $i++; ?>
                     @endforeach
                 </tbody>
             </table>
-            {{ $menu->links() }}
-
+            {{ $order->links() }}
         </div>
         <!-- AKHIR DATA -->
     </main>

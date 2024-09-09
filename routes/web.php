@@ -27,17 +27,15 @@ Route::get('/', function () {
 
 // AdminPage
 Route::resource('admin', FoodappController::class)->middleware('auth', 'isadmin');
+Route::get('/manageOrder', [OrderController::class, 'order']);
+
 
 //Show Menus ke halaman utama dan order
-
-
 Route::get('/', [FoodappController::class, 'showMenus'])->name('menus');
 Route::post('/order/{id}', [OrderController::class, 'saveOrder'])->name('saveOrder');
 Route::get('/order/{id}', [OrderController::class, 'showOrderForm'])->name('order');
 
 
-//Order Menu 
-Route::get('/order', [OrderController::class, 'order']);
 
 
 // LoginPage
