@@ -7,6 +7,7 @@ use App\Models\Order;
 use Facade\Ignition\Exceptions\ViewException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class OrderController extends Controller
 {
@@ -19,6 +20,7 @@ class OrderController extends Controller
 
     public function saveOrder(Request $request, int $id)
     {
+
         $menu = Menu::findorFail($id);
         Order::create([
             'name' => $menu->name,
@@ -29,9 +31,11 @@ class OrderController extends Controller
             'user_id' => Auth::user()->id,
         ]);
 
+
         return redirect()->back()->with('success', 'Menu telah di pesan!');
     }
-
+    
+    // Method untuk ke halaman DataPesanan
     public function order(Request $request)
     {
 
@@ -45,7 +49,22 @@ class OrderController extends Controller
 
         $order = Order::orderBy('created_at', 'desc')->paginate(5);
         return view('kelolaOrder')->with('order', $order);
+    }
 
-        // return view('kelolaOrder');
+    // Method untuk ke halaman CustomerOrder
+    public function customerOrder(Request $request)
+    {
+
+        if (!auth()->check()) {
+            abort(403);
+        }
+
+        if (auth()->user()->role !== 'customer') {
+            abort(403);
+        }
+
+        $order = Order::orderBy('created_at', 'desc')->where('user_id',auth()->user()->id)->paginate(5);
+
+        return view('customerOrder')->with('order', $order);
     }
 }

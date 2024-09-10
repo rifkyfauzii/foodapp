@@ -54,6 +54,15 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li>
+                                    <form action="/customerOrder" method="post">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item">
+                                            <i class="bi bi-cart-check"></i>
+                                            MyOrders
+                                        </button>
+                                    </form>
+                                </li>
+                                <li>
                                     <form action="/logout" method="post">
                                         @csrf
                                         <button type="submit" class="dropdown-item">

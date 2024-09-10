@@ -24,6 +24,9 @@ Route::get('/', function () {
 
 
 
+// MyOrders Page
+Route::get('/customerOrder', [OrderController::class, 'customerOrder']);
+Route::post('/customerOrder', [OrderController::class, 'customerOrder']);
 
 // AdminPage
 Route::resource('admin', FoodappController::class)->middleware('auth', 'isadmin');
@@ -34,8 +37,6 @@ Route::get('/manageOrder', [OrderController::class, 'order']);
 Route::get('/', [FoodappController::class, 'showMenus'])->name('menus');
 Route::post('/order/{id}', [OrderController::class, 'saveOrder'])->name('saveOrder');
 Route::get('/order/{id}', [OrderController::class, 'showOrderForm'])->name('order');
-
-
 
 
 // LoginPage
