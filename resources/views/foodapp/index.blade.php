@@ -77,7 +77,7 @@
 
             <!-- TOMBOL TAMBAH DATA -->
             <div class="pb-3 text-end me-3 mt-3 mb-3">
-                <a href='{{ url('admin/create') }}' class="btn btn-primary">+ Tambah Data</a>
+                <a href='{{ url('admin/create') }}' class="btn btn-primary">+ Tambah Menu</a>
             </div>
 
             <table class="table table-striped">

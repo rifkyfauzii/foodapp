@@ -27,7 +27,7 @@ body::-webkit-scrollbar {
     width: 450px;
     height: 450px;
     left: 750px;
-    top: 160px;
+    top: 140px;
 }
 
 .rounded-shape {
@@ -38,17 +38,17 @@ body::-webkit-scrollbar {
     width: 450px;
     height: 450px;
     left: 750px;
-    top: 160px;
+    top: 140px;
 }
 
 
 
 /* Hero Typograph */
 .container-lg .hero-text p {
-    line-height: 50px;
+    line-height: 65px;
     text-align: left;
     font-family: "Poppins", sans-serif;
-    font-size: 72px;
+    font-size: 70px;
     font-weight: 700;
     font-style: normal;
 }

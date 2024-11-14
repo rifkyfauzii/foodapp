@@ -74,10 +74,11 @@
                 <thead>
                     <tr class="text-center">
                         <th class="col-md-1">No</th>
-                        <th class="col-md-2">Nama</th>
-                        <th class="col-md-2">Harga</th>
-                        <th class="col-md-2">Jumlah pesanan</th>
-                        <th class="col-md-3">Pesan</th>
+                        <th class="col-md-1">Customer</th>
+                        <th class="col-md-2">Menu</th>
+                        <th class="col-md-1">Harga</th>
+                        <th class="col-md-1">Quantity</th>
+                        <th class="col-md-2">Pesan</th>
                         <th class="col-md-2">Total</th>
                     </tr>
                 </thead>
@@ -86,6 +87,7 @@
                     @foreach ($order as $items)
                         <tr class="text-center">
                             <td>{{ $i }}</td>
+                            <td>{{ $items->user->name }}</td>
                             <td>{{ $items->name }}</td>
                             <td>Rp {{ number_format($items->price, 0, ',', '.') }}</td>
                             <td>{{ $items->qty }}</td>

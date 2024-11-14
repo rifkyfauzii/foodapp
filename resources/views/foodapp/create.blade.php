@@ -11,6 +11,9 @@
 
 <body class="bg-light">
     <a href="{{ url('admin') }}" class="btn btn-secondary m-3">Kembali</a>
+
+    <h1 class="ms-3">Halaman Tambah Menu</h1>
+
     @if ($errors->any())
         <div class="pt-3">
             <div class="alert alert-danger">

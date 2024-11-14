@@ -18,10 +18,11 @@ use App\Http\Controllers\OrderController;
 |
 */
 
+
+// Route tampilan utama web
 Route::get('/', function () {
     return view('home');
 });
-
 
 
 // MyOrders Page
@@ -37,6 +38,12 @@ Route::get('/manageOrder', [OrderController::class, 'order']);
 Route::get('/', [FoodappController::class, 'showMenus'])->name('menus');
 Route::post('/order/{id}', [OrderController::class, 'saveOrder'])->name('saveOrder');
 Route::get('/order/{id}', [OrderController::class, 'showOrderForm'])->name('order');
+Route::delete('/order/{id}', [OrderController::class, 'destroy']);
+
+//keranjang
+Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::delete('/cart/{id}', [CartController::class, 'remove'])->name('cart.remove');
 
 
 // LoginPage
@@ -44,6 +51,7 @@ Route::get('/login', [LoginController::class, 'index'])->middleware('guest')->na
 Route::post('/login', [LoginController::class, 'authenticate']);
 
 
+// Route Logout
 Route::post('/logout', [LoginController::class, 'logout']);
 
 

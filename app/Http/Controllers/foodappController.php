@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 
-class foodappController extends Controller
+class FoodappController extends Controller
 {
     /**
      * Display a listing of the resource.

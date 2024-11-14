@@ -18,7 +18,7 @@
             </div>
 
             <div class="card me-4 border-0" style="width: 18rem; margin-top:60px; border border-0">
-                <img src="img/delivery.png" class="card-img-top" alt="delivery">
+                <img src="img/halal.png" class="card-img-top" alt="delivery">
                 <div class="card-body">
                     <h5 class="card-title text-center">Fastest Delivery</h5>
                     <p class="card-text text-sm-center">Delivery that is always ontime even faster</p>

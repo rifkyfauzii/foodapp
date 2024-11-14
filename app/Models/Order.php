@@ -15,6 +15,7 @@ class Order extends Model
         'qty',
         'notes',
         'total',
+        'table_number',
         'user_id',
     ];
 

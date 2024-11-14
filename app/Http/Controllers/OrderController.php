@@ -27,6 +27,7 @@ class OrderController extends Controller
             'price' => $menu->price,
             'qty' => (int)$request->input('quantity'),
             'notes' => $request->input('notes'),
+            'table_number' => $request->input('table_number'),
             'total' => $menu->price * (int)$request->input('quantity'),
             'user_id' => Auth::user()->id,
         ]);
@@ -49,6 +50,8 @@ class OrderController extends Controller
 
         $order = Order::orderBy('created_at', 'desc')->paginate(5);
         return view('kelolaOrder')->with('order', $order);
+
+        $order = Order::with('user')->get();
     }
 
     // Method untuk ke halaman CustomerOrder
@@ -66,5 +69,11 @@ class OrderController extends Controller
         $order = Order::orderBy('created_at', 'desc')->where('user_id',auth()->user()->id)->paginate(5);
 
         return view('customerOrder')->with('order', $order);
+    }
+
+    public function destroy($id)
+    {
+        Order::where('notes', $id)->delete();
+        return redirect()->to('customerOrder')->with('success', 'Pesanan berhasil dibatalkan!');
     }
 }

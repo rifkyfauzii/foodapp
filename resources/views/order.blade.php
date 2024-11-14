@@ -28,13 +28,17 @@
                     <div class="card-header bg-danger text-white text-center">
                         <h4>FUDO | Menu Order</h4>
 
+                        {{-- Kembali ke halaman Utama --}}
                         <a href="{{ url('/') }}" class=" btn btn-secondary m-1"><i
                                 class="bi bi-chevron-bar-left"></i>Kembali</a>
                     </div>
                     <div class="card-body">
                         {{-- Gambar Menu --}}
-                        <img class="food" src="{{ asset('storage/' . $menu->image) }}" alt="menus"
-                            style=" width:120px; height: 120px; object-fit: cover;">
+
+                        <div class="text-center">
+                            <img class="food" src="{{ asset('storage/' . $menu->image) }}" alt="menus"
+                                style=" width:180px; height: 180px; object-fit: cover;">
+                        </div>
 
                         <form action="/order/{{ $menu->id }}" method="post">
                             @csrf
@@ -56,7 +60,7 @@
                             <div class="mb-3">
                                 <label for="jumlahPesanan" class="form-label">Jumlah Pesanan</label>
                                 <input type="number" class="form-control border-danger" id="jumlahPesanan"
-                                    name="quantity" placeholder="Jumlah Pesanan" required>
+                                    name="quantity" placeholder="Jumlah Pesanan" min="1" max="20" required>
                             </div>
 
                             <!-- Pesan -->
@@ -66,15 +70,20 @@
                                     placeholder="Variant,Ukuran,topping.."></textarea>
                             </div>
 
-                            <!-- Tombol Submit -->
-                            <div class="d-grid">
-                                <button type="submit" class="btn btn-danger">Submit Order</button>
-                            </div>
-                        </form>
                     </div>
+
+                    <div class="d-flex gap-2 mt-3">
+                        <button type="button" class="btn btn-warning flex-fill">Masukan Keranjang</button>
+
+                        <button type="submit" class="btn btn-danger flex-fill">Submit Order</button>
+                    </div>
+
+
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
