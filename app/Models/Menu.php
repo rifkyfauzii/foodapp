@@ -11,4 +11,11 @@ class Menu extends Model
     protected $fillable = ['name','image','price'];
     protected $table = 'menus';
     public $timestamps = false;
+
+    public function carts()
+{
+    return $this->hasMany(Cart::class, 'menu_id');
 }
+
+}
+

@@ -8,6 +8,7 @@ use Facade\Ignition\Exceptions\ViewException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Cart;
 
 class OrderController extends Controller
 {
@@ -32,7 +33,6 @@ class OrderController extends Controller
             'user_id' => Auth::user()->id,
         ]);
 
-
         return redirect()->back()->with('success', 'Menu telah di pesan!');
     }
     
@@ -48,7 +48,7 @@ class OrderController extends Controller
             abort(403);
         }
 
-        $order = Order::orderBy('created_at', 'desc')->paginate(5);
+        $order = Order::orderBy('created_at', 'desc');
         return view('kelolaOrder')->with('order', $order);
 
         $order = Order::with('user')->get();
@@ -71,6 +71,7 @@ class OrderController extends Controller
         return view('customerOrder')->with('order', $order);
     }
 
+    
     public function destroy($id)
     {
         Order::where('notes', $id)->delete();

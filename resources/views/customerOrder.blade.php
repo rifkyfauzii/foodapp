@@ -17,7 +17,6 @@
 
     {{-- Bootstrap Icon --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
 </head>
 
 
@@ -66,7 +65,6 @@
 
             <br>
             <br>
-
             <table class="table table-striped">
                 <thead>
                     <tr class="text-center">

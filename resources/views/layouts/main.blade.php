@@ -57,10 +57,16 @@
                                     <form action="/customerOrder" method="post">
                                         @csrf
                                         <button type="submit" class="dropdown-item">
-                                            <i class="bi bi-cart-check"></i>
+                                            <i class="bi bi-handbag"></i>
                                             MyOrders
                                         </button>
                                     </form>
+                                </li>
+                                <li>
+                                    <a href="{{ route('cart.index') }}" class="dropdown-item">
+                                        <i class="bi bi-cart-plus-fill"></i>
+                                        Keranjang
+                                    </a>
                                 </li>
                                 <li>
                                     <form action="/logout" method="post">
