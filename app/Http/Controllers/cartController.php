@@ -72,28 +72,30 @@ class CartController extends Controller
 
 public function checkout()
 {
-    $carts = Cart::all(); // Ambil semua data di tabel carts
+    $carts = Cart::where('user_id', Auth::id())->get();
+
 
     if ($carts->isEmpty()) {
         return redirect()->back()->with('error', 'Keranjang Anda kosong!');
     }
 
-    // (Opsional) Proses data untuk dicatat sebagai riwayat pesanan
+    // Pindahkan data dari `carts` ke `orders`
     foreach ($carts as $cart) {
-        // Jika Anda memiliki tabel lain seperti `orders`, pindahkan data ke sana
-        Order::create([
-            'menu_name' => $cart->menu_name,
+
+        
+       $order = Order::create([
+            'user_id' => Auth::id(), // Tambahkan user_id
+            'name' => $cart->menu->name,
             'qty' => $cart->qty,
             'notes' => $cart->notes,
-            'total_price' => $cart->total_price,
+            'price' => $cart->price,
+            'total' => $cart->total,
         ]);
     }
 
-    // // Hapus semua data dari tabel carts
-    // Cart::truncate(); // Mengosongkan semua data di tabel carts
-
-    return redirect()->route('cart.index')->with('success', 'Checkout berhasil! Pesanan Anda sedang diproses.');
+        Cart::truncate();
+        
+        return redirect()->back()->with('success', 'Checkout berhasil!');
 }
-
 
 }

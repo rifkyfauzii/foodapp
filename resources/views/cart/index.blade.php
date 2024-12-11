@@ -46,6 +46,7 @@
                             <th>Nama Menu</th>
                             <th>Jumlah</th>
                             <th>Catatan</th>
+                            <th>Harga</th>
                             <th>Total Harga</th>
                             <th>Aksi</th>
                         </tr>
@@ -58,6 +59,7 @@
                                 <td>{{ $cart->menu->name }}</td>
                                 <td>{{ $cart->qty }}</td>
                                 <td>{{ $cart->notes }}</td>
+                                <td>{{ $cart->price }}</td>
                                 <td>Rp {{ number_format($cart->total, 0, ',', '.') }}</td>
                             </tr>
                             @php $totalPrice += $cart->total * $cart->qty; @endphp

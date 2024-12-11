@@ -19,45 +19,51 @@
 
 <body class="bg-light">
     {{-- Navbar Start --}}
-    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #C7253E">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #C7253E;">
         <div class="container-fluid">
-            <img class="mt-1" style="width:105px; height:40px; margin-left:30px;" src="img/logo.png" alt="logo Fudo">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
-                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <!-- Logo -->
+            <a class="navbar-brand ms-3" href="#">
+                <img src="img/logo.png" alt="Fudo Logo" class="d-inline-block align-text-top" style="width: 120px;">
+            </a>
+
+            <!-- Toggler for Mobile -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+            <!-- Navbar Content -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- Left Links -->
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link fw-bold text-white" href="{{ url('admin') }}">Kelola Menu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-bold text-white" href="{{ url('manageOrder') }}">Data Pesanan</a>
+                    </li>
                 </ul>
 
-                <ul class="navbar-nav justify-content-center ms-4 mt-2">
-                    <a class="nav-link fw-bold text-light mx-3" href="{{ url('admin') }}" id="navbarDropdown"
-                        role="button" aria-expanded="false">
-                        Kelola Menu
-                    </a>
-                    <a class="nav-link fw-bold text-light mx-3" href="{{ url('manageOrder') }}" id="navbarDropdown"
-                        role="button" aria-expanded="false">
-                        Data Pesanan
-                    </a>
-                </ul>
-
-
-
-                <ul class="navbar-nav ms-auto mt-3 mb-2 me-4">
-                    <a class="nav-link me-4 text-light" href="#" id="navbarDropdown" role="button"
-                        aria-expanded="false">
-                        Halo, Admin !
-                    </a>
-                    <form action="/logout" method="post">
-                        @csrf
-                        <button type="submit" class="nav-link px-3 mt-1 text-danger bg-light border-0"><i
-                                class="bi bi-box-arrow-right"></i>
-                            Logout</button>
-                    </form>
+                <!-- Right Links -->
+                <ul class="navbar-nav ms-auto">
+                    <!-- Admin Greeting -->
+                    <li class="nav-item me-3">
+                        <span class="navbar-text text-light">
+                            Halo, Admin!
+                        </span>
+                    </li>
+                    <!-- Logout Button -->
+                    <li class="nav-item">
+                        <form action="/logout" method="post" class="d-inline">
+                            @csrf
+                            <button type="submit" class="btn btn-outline-light btn-sm">Logout</button>
+                        </form>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
+
 
     {{-- Navbar End --}}
     <main class="container">

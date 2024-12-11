@@ -24,13 +24,13 @@ class OrderController extends Controller
 
         $menu = Menu::findorFail($id);
         Order::create([
+            'user_id' => Auth::user()->id,
             'name' => $menu->name,
             'price' => $menu->price,
             'qty' => (int)$request->input('quantity'),
             'notes' => $request->input('notes'),
             'table_number' => $request->input('table_number'),
             'total' => $menu->price * (int)$request->input('quantity'),
-            'user_id' => Auth::user()->id,
         ]);
 
         return redirect()->back()->with('success', 'Menu telah di pesan!');
@@ -39,20 +39,18 @@ class OrderController extends Controller
     // Method untuk ke halaman DataPesanan
     public function order(Request $request)
     {
-
-        if (!auth()->check()) {
-            abort(403);
-        }
-
-        if (auth()->user()->role !== 'admin') {
-            abort(403);
-        }
-
-        $order = Order::orderBy('created_at', 'desc');
-        return view('kelolaOrder')->with('order', $order);
-
-        $order = Order::with('user')->get();
+    // Pastikan hanya admin yang dapat mengakses halaman ini
+    if (!auth()->check() || auth()->user()->role !== 'admin') {
+        abort(403);
     }
+
+    // Ambil data pesanan dengan pagination
+    $order = Order::orderBy('created_at', 'desc')->paginate(10);
+
+    // Kirim data ke view
+    return view('kelolaOrder', compact('order'));
+    }
+
 
     // Method untuk ke halaman CustomerOrder
     public function customerOrder(Request $request)
