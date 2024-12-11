@@ -98,4 +98,17 @@ public function checkout()
         return redirect()->back()->with('success', 'Checkout berhasil!');
 }
 
+public function destroy($id)
+{
+    // Cari item berdasarkan ID
+    $cartItem = Cart::findOrFail($id);
+
+    // Hapus item
+    $cartItem->delete();
+
+    // Redirect kembali ke halaman keranjang dengan pesan sukses
+    return redirect()->route('cart.index')->with('success', 'Item berhasil dihapus dari keranjang.');
+}
+
+
 }

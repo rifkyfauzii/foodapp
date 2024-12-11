@@ -61,6 +61,17 @@
                                 <td>{{ $cart->notes }}</td>
                                 <td>{{ $cart->price }}</td>
                                 <td>Rp {{ number_format($cart->total, 0, ',', '.') }}</td>
+                                <td>
+                                    <!-- Tombol Hapus -->
+                                    <form action="{{ route('cart.destroy', $cart->id) }}" method="POST"
+                                        onsubmit="return confirm('Apakah Anda yakin ingin menghapus item ini?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-outline-danger btn-sm">
+                                            -
+                                        </button>
+                                    </form>
+                                </td>
                             </tr>
                             @php $totalPrice += $cart->total * $cart->qty; @endphp
                         @endforeach
