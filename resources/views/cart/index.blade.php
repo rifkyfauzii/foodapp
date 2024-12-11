@@ -29,9 +29,13 @@
             <h1 class="text-danger"><i class="bi bi-cart3"></i> Keranjang Anda</h1>
         </div>
 
-        <div class="mb-3">
+        <!-- Tombol Navigasi -->
+        <div class="mb-3 d-flex gap-2">
             <a href="{{ url('/') }}" class="btn btn-secondary">
-                <i class="bi bi-chevron-bar-left"></i>Kembali ke Beranda
+                <i class="bi bi-chevron-bar-left"></i> Kembali
+            </a>
+            <a href="{{ url('/#menu-section') }}" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Pesan Lagi
             </a>
         </div>
 
@@ -59,7 +63,7 @@
                                 <td>{{ $cart->menu->name }}</td>
                                 <td>{{ $cart->qty }}</td>
                                 <td>{{ $cart->notes }}</td>
-                                <td>{{ $cart->price }}</td>
+                                <td>Rp {{ number_format($cart->price, 0, ',', '.') }}</td>
                                 <td>Rp {{ number_format($cart->total, 0, ',', '.') }}</td>
                                 <td>
                                     <!-- Tombol Hapus -->

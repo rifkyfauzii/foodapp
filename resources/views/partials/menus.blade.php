@@ -1,9 +1,13 @@
-<section>
+<section id="menu-section">
     <div class="menus-section">
 
         {{-- style --}}
 
         <style>
+            html {
+                scroll-behavior: smooth;
+            }
+
             .card:hover {
                 transform: scale(1.05);
                 transition: transform 0.3s ease-in-out;
